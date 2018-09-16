@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta t="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js" type="application/javascript"></script>
+    <title>Registeration</title>
+    <SCRIPT>
+        var app=angular.module('registerApp',[]);
+        app.controller('Registration',function ($scope) {
+            $scope.register=function (name,username,password,password1,phonenum) {
+                if(angular.equals(password,password1)){
+                    var x=[name,username,password,phonenum];
+                    if(username==localStorage.getItem(JSON.stringify(username))){
+                        $scope.userExist="username already exists please try again";
+                    }else{
+                    localStorage.setItem(JSON.stringify(username),JSON.stringify(x));
+                }}
+                else{
+                    $scope.err="Password does not match";
+                }
+            }
+        });
+    </SCRIPT>
+</head>
+<body ng-app="registerApp" ng-controller="Registration">
+<form>
+    <fieldset>
+        <legend>Registration</legend>
+        Name: <input type="text" placeholder="Enter FullName" ng-model="name"><br/><br/>
+        Username: <input type="text" placeholder="Enter Username" ng-model="username"><br/><br/>
+        Password: <input type="password" placeholder="Enter Password" ng-model="password"><br/><br/>
+        Confirm Password: <input type="password" placeholder="Confirm Password" ng-model="password1"><br/><br/>
+        <span ng-bind="err"></span><br/><br/>
+        Phone number: <input type="text" placeholder="Phone Number" ng-model="phonenum"><br/><br/>
+        <input type="button" value="Register" ng-click="register(name,username,password,password1,phonenum)">
+    </fieldset>
+    <span ng-bind="userExist"></span>
+</body>
+</html>

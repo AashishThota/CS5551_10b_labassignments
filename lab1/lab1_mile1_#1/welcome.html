@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js" type="application/javascript"></script>
+    <title>Welcome</title>
+    <SCRIPT>
+        var app=angular.module("Login",[]);
+        app.controller("loginValidate",function ($scope) {
+            $scope.Validate=function (username,password) {
+                if(localStorage.getItem(JSON.stringify(username))!=null){
+                    $scope.correct="congrats";
+                }
+
+
+                else{
+                    $scope.correct="please enter correct credentials";
+                }
+            }
+        });
+    </SCRIPT>
+</head>
+<body ng-app="Login" ng-controller="loginValidate">
+<div>
+    <form method="post">
+        <label>Username:</label>
+        <input type="text" placeholder="Enter User Name" ng-model="username"><br/><br/>
+        <label>Password:</label>
+        <input type="password" placeholder="enter password" ng-model="password"><br/><br/>
+        <span ng-bind="correct"></span>
+        <input type="button" value="Sign In" ng-click="Validate(username,password)"><br/><br/>
+        <button ><img src="https://images.vexels.com/media/users/3/137283/isolated/preview/8ca486faebd822ddf4baf00321b16df1-google-icon-logo-by-vexels.png" style="height: 20px;width: 20px">Sign In</button><br/><br/>
+        <button><img src="http://thephantom.org/wp-content/uploads/vector-facebook-icons-download-icon-vector-eps-ai-seeklogo.png " style="height: 20px;width: 20px">Sign In</button>
+    </form>
+</div>
+</body>
+</html>
