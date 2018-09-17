@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title></title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js" type="application/javascript"></script>
+
+    <script>
+        var app=angular.module("homepage",[]);
+        app.controller("homepageapis",function ($scope,$http) {
+            $scope.getresult=function (searchitem) {
+                $http.get('https://kgsearch.googleapis.com/v1/entities:search?query='+searchitem+'&key=AIzaSyBmSS1EEgf6gA1gN6ms9DZ5jkn9yp1hpsQ&limit=1&indent=True').success(function (data) {
+                    $scope.heading=data.itemListElement[0].result.name;
+                    $scope.desc=data.itemListElement[0].result.description;
+                    $scope.imgloc=data.itemListElement[0].result.image.contentUrl;
+                    $scope.detaileddesc=data.itemListElement[0].result.detailedDescription.articleBody;
+                    document.getElementById("photo").style="display: block"
+                });
+            }
+        });
+    </script>
+</head>
+<body ng-app="homepage" ng-controller="homepageapis">
+<div>
+    <input type="search"  ng-model="searchitem" placeholder="Search">
+    <button ng-click="getresult(searchitem)"><i class="fas fa-search"></i></button>
+
+</div>
+<div>
+    <h1 ng-bing="heading">{{heading}}</h1>
+    <img id="image" ng-src="{{imgloc}}" style="float: left; margin-right: 15px;"><div id="photo" style=" display: none;">
+    <label><strong>Description</strong></label> <p ng-bind="desc">{{desc}}</p><br /><br />
+    <label><strong> Detailed Description</strong></label><p ng-bind="detaileddesc" >{{detaileddesc}}</p>
+</div></div>
+</body>
+</html>
