@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js" type="application/javascript"></script>
+    <script>
+        var app=angular.module("homepage",[]);
+        app.controller("homepageapis",function ($scope,$http) {
+            $scope.getresult=function (searchitem) {
+                $http.get('https://kgsearch.googleapis.com/v1/entities:search?query='+searchitem+'&key=AIzaSyBmSS1EEgf6gA1gN6ms9DZ5jkn9yp1hpsQ&limit=1&indent=True').success(function (data) {
+                    $scope.heading=data.itemListElement[0].result.name;
+                    $scope.desc=data.itemListElement[0].result.description;
+                    $scope.imgloc=data.itemListElement[0].result.image.contentUrl;
+                    $scope.detaileddesc=data.itemListElement[0].result.detailedDescription.articleBody;
+                });
+            }           
+        });
+    </script>
+</head>
+<body ng-app="homepage" ng-controller="homepageapis">
+<div>
+    <h1>Welcome Page</h1></div>
+<div>
+    <a href="About Page.html">About Page</a>
+    <a href="welcome.html">SignOut</a>
+    <a href="Contact">Contact</a>
+</div>
+<div>
+    <input type="search" ng-model="searchitem"><br/><br/>
+    <button ng-click="getresult(searchitem)"><i class="fas fa-search"></i></button>
+
+</div>
+<div>
+    <h1 ng-bing="heading">{{heading}}</h1>
+    <img id="image" ng-src="{{imgloc}}">
+    <p ng-bind="desc">{{desc}}</p>
+    <p ng-bind="detaileddesc">{{detaileddesc}}</p>
+</div>
+<div></div>
+</body>
+</html>
