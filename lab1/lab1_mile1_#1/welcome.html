@@ -2,8 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="welcomep.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js" type="application/javascript"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="569223122851-g2lp9vv4qtsrogm5j643lge0ugjr3gji.apps.googleusercontent.com">
     <title>Welcome</title>
     <SCRIPT>
         var app=angular.module("Login",[]);
@@ -19,19 +32,64 @@
                 }
             }
         });
+        function onSignIn(googleUser) {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut();
+            var profile = googleUser.getBasicProfile();
+            var Username=profile.getName();
+            var email=profile.getEmail();
+            var y=[Username,email];
+            if(localStorage.getItem(Username)==null)
+            localStorage.setItem(JSON.stringify(Username),JSON.stringify(y));
+            window.location="Home Page.html";
+        }
     </SCRIPT>
+
 </head>
 <body ng-app="Login" ng-controller="loginValidate">
-<div>
-    <form method="post">
+<div id="fb-root"></div>
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId            : '1825210487578334',
+            autoLogAppEvents : true,
+            xfbml            : true,
+            version          : 'v3.1'
+        });
+    };
+    (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1&appId=1825210487578334&autoLogAppEvents=1';
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+function loginfb(){
+    FB.login(function (response) {
+        if(localStorage.getItem(JSON.stringify(response.name))){
+
+        }else{localStorage.setItem(JSON.stringify(response.name)),JSON.stringify(response)}
+window.location="Home Page.html";
+    },{scope: 'public_profile,email'});
+
+}
+</script>
+<div >
+    <form method="post" class=".container login">
+        <fieldset>
+            <legend align="center">Login</legend>
         <label>Username:</label>
         <input type="text" placeholder="Enter User Name" ng-model="username"><br/><br/>
         <label>Password:</label>
         <input type="password" placeholder="enter password" ng-model="password"><br/><br/>
         <span ng-bind="correct"></span>
-        <input type="button" value="Sign In" ng-click="Validate(username,password)"><br/><br/>
-        <button ><img src="https://images.vexels.com/media/users/3/137283/isolated/preview/8ca486faebd822ddf4baf00321b16df1-google-icon-logo-by-vexels.png" style="height: 20px;width: 20px">Sign In</button><br/><br/>
-        <button><img src="http://thephantom.org/wp-content/uploads/vector-facebook-icons-download-icon-vector-eps-ai-seeklogo.png " style="height: 20px;width: 20px">Sign In</button>
+        <button class="" ng-click="Validate(username,password)"> <i class="fas fa-sign-in-alt"></i>  Sign In</button><br/><br/>
+            <button class="btn btn-primary"  onclick="loginfb()"><i class="fab fa-facebook-f"></i>  Continue with Facebook</button>
+    <br /><br/>
+    <div class="g-signin2 gmaillog" data-onsuccess="onSignIn"></div>
+        <br /><br/>
+      <a href="Register.html">Create a new Account</a>
+        </fieldset>
     </form>
 </div>
 </body>
