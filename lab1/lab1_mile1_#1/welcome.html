@@ -23,7 +23,9 @@
         app.controller("loginValidate",function ($scope) {
             $scope.Validate=function (username,password) {
                 if(localStorage.getItem(JSON.stringify(username))!=null){
-                    $scope.correct="congrats";
+                    var x=localStorage.getItem(JSON.stringify(username));
+                    if(x.includes(password))
+                    window.location='Home Page.html?username='+username;
                 }
 
 
@@ -41,7 +43,7 @@
             var y=[Username,email];
             if(localStorage.getItem(Username)==null)
             localStorage.setItem(JSON.stringify(Username),JSON.stringify(y));
-            window.location="Home Page.html";
+            window.location='Home Page.html?username="'+Username+'"';
         }
     </SCRIPT>
 
@@ -66,10 +68,11 @@
 }(document, 'script', 'facebook-jssdk'));
 function loginfb(){
     FB.login(function (response) {
+        var user=response.name;
         if(localStorage.getItem(JSON.stringify(response.name))){
 
         }else{localStorage.setItem(JSON.stringify(response.name)),JSON.stringify(response)}
-window.location="Home Page.html";
+window.location='Home Page.html?username="'+user+'"';
     },{scope: 'public_profile,email'});
 
 }

@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js" type="application/javascript"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -14,9 +16,14 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <Script>
+        var app=angular.module("homewel",[]);
+        app.controller("navig",function ($scope) {
+            $scope.name='Hello '+decodeURIComponent((new RegExp('[?|&]username=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;;
+        });
+    </Script>
 </head>
-<body >
+<body ng-app="homewel" ng-controller="navig">
 <div class="heading">
     <center><h1>Welcome Page</h1></center>
 </div>
@@ -26,9 +33,11 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="home.html" target="home">Home</a></li>
                 <li> <a href="About Page.html" target="home">About Page</a></li>
-                <li><a href="welcome.html" target="=home">SignOut</a></li>
+                <li><a href="imagesearch.html" target="=home">image search</a></li>
                 <li><a href="Contact.html" target="home">Contact</a></li>
             </ul>
+            <ul style="float: right;padding-top: 3px" class="nav navbar-nav" ><li><a href="welcome.html">Sign Out</a></li></ul>
+            <label class=" my-2 my-lg-0" style="padding-top: 20px;float: right; margin-right: 50px" ng-bind="name"> <label>
 </div></nav></div>
 <iframe height="500px" width="100%"  frameborder="0" border="0" cellspacing="0" src="home.html" name="home">
 </iframe>
