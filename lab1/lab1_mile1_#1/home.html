@@ -34,14 +34,16 @@
     </script>
 </head>
 <body ng-app="homepage" ng-controller="homepageapis">
-<div>
+<h1 style="color:palevioletred"><center><strong>Google Knowledge Graph</strong></center></h1>
+<div style="text-align: center">
+
     <input type="search"  ng-model="searchitem" placeholder="Search">
     <button ng-click="getresult(searchitem)"><i class="fas fa-search"></i></button>
 
 </div>
 <div>
     <h1 ng-bing="heading">{{heading}}</h1>
-    <img id="image" ng-src="{{imgloc}}" style="float: left; margin-right: 15px;"><div id="photo" style=" display: none;">
+    <img  id="image" ng-src="{{imgloc}}" style="float: left; margin-right: 15px;"><div id="photo" style=" display: none;">
     <label><strong>Description</strong></label> <p ng-bind="desc">{{desc}}</p><br /><br />
     <label><strong> Detailed Description</strong></label><p ng-bind="detaileddesc" >{{detaileddesc}}</p>
 </div></div>
