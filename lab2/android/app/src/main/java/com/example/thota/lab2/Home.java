@@ -47,7 +47,7 @@ import io.reactivex.schedulers.Schedulers;
 public class Home extends AppCompatActivity  {
     ImageView imageView;
     InputStream finalImageStream;
-    Button scan;
+    Button scan,log;
     int TAKE_PHOTO_CODE = 0;
     String imagepath="";
     Single<ClassifiedImages> observable;
@@ -61,6 +61,14 @@ public class Home extends AppCompatActivity  {
         imageView=(ImageView)findViewById(R.id.imageView);
         lblResult=(TextView)findViewById(R.id.Result);
         scan=(Button)findViewById(R.id.Scan);
+        log=(Button)findViewById(R.id.log);
+        log.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent redirect= new Intent(Home.this,MainActivity.class);
+                startActivity(redirect);
+            }
+        });
       //  scan.setOnClickListener(new View.OnClickListener() {
         //    @Override
           //  public void onClick(View v) {
@@ -96,6 +104,7 @@ public class Home extends AppCompatActivity  {
             emitter.onSuccess(classifiedImages);
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
+
 
     }
     public void getResult() {

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "929827720227",
+    "firebase_url": "https://lab2-82bc5.firebaseio.com",
+    "project_id": "lab2-82bc5",
+    "storage_bucket": "lab2-82bc5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:929827720227:android:75d55e94419946d1",
+        "android_client_info": {
+          "package_name": "com.example.thota.lab2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "929827720227-6n25i36nhn1r1p6d3pr45kgcp9hj486s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOBQs-LyHgkLVvQImaR-APrO_uHs3-O10"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
