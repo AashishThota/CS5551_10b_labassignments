@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="scripts/index.js"></script>
+<link rel="stylesheet" href="styles/index.css">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body ng-app="login_and_register" ng-controller="login_controller">
+  
+    <div id="left_part">
+        <p></p>
+    </div>
+    <div id="center_part">
+        
+        <form>
+            <p>Username</p>
+            <input type="text"  ng-model="formData.user_name" name="username" id="username" class="span3"></br>
+
+            <p>Password</p>
+            <input type="password" ng-model="formData.password" name="password" id="password" class="span3"></br>
+
+           
+            <div>
+                <div id="login_div">
+                    <button type="button"  ng-click="login()" class="btn btn-primary" id="login">Sign In</button>
+                </div>
+            </div>
+        </form>
+        
+        <p style="text-align: center"> <a href="sign_up.html">SIGN UP</a></p>
+    </div>
+    <div id="right_part">
+        <p></p>
+    </div>
+</body>
+</html>
