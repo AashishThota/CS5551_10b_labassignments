@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-var MongoClient=require('mongodb').MongoClient;
+const mongoose = require('mongoose');
 const user = require('../models/user');
 
-const database = "mongodb://users:sairam4@ds135993.mlab.com:35993/practice";
+const database = "mongodb://kaphc:Xyloa7707@ds147723.mlab.com:47723/lab-3";
 
 mongoose.Promise = global.Promise;
 mongoose.connect(database, function (err) {
@@ -28,30 +28,21 @@ router.post('/login', function(req, res){
 });
 
 router.post('/register', function(req, res){
-    MongoClient.connect(url, function(err, client) {
-        console.log("hi");
-        if(err)
-        {
-            console.log(err);
-            res.write("Failed, Error while connecting to Database");
-            res.end();
+    var newUser = new user();
+
+    newUser.user_name = req.body.user_name;
+    newUser.password = req.body.password;
+    newUser.email_id = req.body.email_id;
+
+    newUser.save(function(err, insertUser){
+        if(err){
+            console.log("Error : " + err);
+            res.json({success: false, msg: "failed to register"})
+        } else {
+            res.json({success: true, msg: "Successfully Registered!!!!!"});
         }
-        var db= client.db("practice");
-        insertDocument(db, req.body, function() {
-            res.write("Successfully inserted");
-            res.end();
-        });
     });
 });
-var insertDocument= function(db, data, callback){
-    db.collection('users').insertOne(data,function(err, result){
-        if(err)
-            {
-                res.write("Registration Failed, Error While Registering");
-                res.end();
-            }
-            
-    })
-    }
+
 
 module.exports = router;
